@@ -1,0 +1,82 @@
+SELECT *
+FROM Superstore
+LIMIT 5;
+
+SELECT *
+FROM Superstore
+WHERE rowid IS NULL OR orderid IS NULL OR orderdate IS NULL OR shipdate IS NULL OR sales IS NULL;
+
+SELECT *
+FROM Superstore
+GROUP BY orderdate, shipdate, shipmode, customerid, customername, segment, country, city, postalcode, region, productid, category, "sub-category", productname, sales, quantity, discount, profit
+HAVING COUNT(*) > 1
+ORDER BY orderid;
+
+SELECT SUBSTR(orderdate, -4, 4) AS year, ROUND(sum(sales)) AS Total_Sales_Revenue, ROUND(sum(profit)) AS Total_Profit
+FROM Superstore
+GROUP BY year
+ORDER BY year DESC;
+
+SELECT Category, COUNT(*) AS Number_of_Orders
+From Superstore
+GROUP BY Category
+ORDER BY Number_of_Orders DESC;
+
+SELECT Category, round(sum(Sales)) AS Total_Sales, ROUND(sum(Profit)) AS Total_Profit, round(SUM(profit)/SUM(sales)*100) AS Profit_Margin
+FROM Superstore
+GROUP BY Category
+ORDER BY Total_Profit DESC;
+
+SELECT ProductName, ROUND(SUM(Profit)) AS Total_Profit
+FROM Superstore
+GROUP BY ProductName
+ORDER BY Total_Profit DESC
+LIMIT 5;
+
+SELECT ProductName, ROUND(SUM(Profit)) AS Total_Profit, round(sum(Sales)) AS Total_Sales, ROUND(sum(Profit)) AS Total_Profit, round(SUM(profit)/SUM(sales)*100) AS Profit_Margin
+FROM Superstore
+GROUP BY ProductName
+ORDER BY Total_Profit DESC
+LIMIT 5;
+
+SELECT ProductName, ROUND(SUM(Profit)) AS Total_Profit, round(sum(Sales)) AS Total_Sales, ROUND(sum(Profit)) AS Total_Profit, round(SUM(profit)/SUM(sales)*100) AS Profit_Margin, Category
+FROM Superstore
+GROUP BY ProductName
+ORDER BY Total_Profit DESC
+LIMIT 10;
+
+SELECT Country, City, State, round(sum(Sales)) AS Total_Sales, ROUND(sum(Profit)) AS Total_Profit, round(SUM(profit)/SUM(sales)*100) AS Profit_Margin
+FROM Superstore
+GROUP BY State
+ORDER BY Total_Profit DESC
+LIMIT 10;
+
+SELECT Country, City, State, round(sum(Sales)) AS Total_Sales, ROUND(sum(Profit)) AS Total_Profit, round(SUM(profit)/SUM(sales)*100) AS Profit_Margin
+FROM Superstore
+GROUP BY State
+ORDER BY Total_Profit ASC
+LIMIT 10;
+
+SELECT Country, City, State, round(sum(Sales)) AS Total_Sales, ROUND(sum(Profit)) AS Total_Profit, round(SUM(profit)/SUM(sales)*100) AS Profit_Margin
+FROM Superstore
+GROUP BY City
+ORDER BY Total_Profit DESC
+LIMIT 10;
+
+SELECT Country, City, State, round(sum(Sales)) AS Total_Sales, ROUND(sum(Profit)) AS Total_Profit, round(SUM(profit)/SUM(sales)*100) AS Profit_Margin
+FROM Superstore
+GROUP BY City
+ORDER BY Total_Profit ASC
+LIMIT 10;
+
+SELECT state, Category, ROUND(SUM(sales)) AS total_sales, ROUND(SUM(profit)) AS total_profit
+FROM Superstore
+GROUP BY state, category
+ORDER BY total_profit DESC
+LIMIT 10;
+
+SELECT state, Category, ROUND(SUM(sales)) AS total_sales, ROUND(SUM(profit)) AS total_profit
+FROM Superstore
+GROUP BY state, category
+ORDER BY total_profit ASC
+LIMIT 10;
